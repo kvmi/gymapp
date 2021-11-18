@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Trainings List</title>
+</head>
+<body>
+<div th:insert="navbar"></div>
+<div id="bg_cover">
+    <div class="card" style="width: 40%; margin-left: 30%">
+        <div class="card-body">
+    <h1>This is training: <span th:text="${training.name}"></span></h1>
+            <h2>Exercises in training:</h2>
+    <tr th:each="exercise : ${training.exercises}">
+        <td th:text="${exercise.name}"></td>
+        <br>
+    </tr>
+
+    <button class="btn btn-secondary btn-sm" id="add_button" th:if="${isOwner}">Add exercise to training</button>
+    <div id="form" style="display: none">
+        <div class="card" style="width: 40%; margin-left: 30%">
+            <div class="card-body">
+                <form th:action="@{/update-training/{id}(id=${training.id})}" th:object="${training}" method="post">
+                    <div class="form-group">
+                        <label class="label">Exercise:</label>
+                        <select th:field="*{exercises}">
+                            <option th:each="exercise:${exerciseList}" th:value="${exercise.id}" th:text="${exercise.name}">
+                            </option>
+                        </select>
+                    </div>
+                    <br/>
+                    <input class="btn btn-primary" type="submit" value="Add Exercise" id="add-button"/>
+                </form>
+            </div>
+        </div>
+    </div>
+        </div>
+</div>
+</div>
+</body>
+<script>
+    const targetDiv = document.getElementById("form");
+    const btn = document.getElementById("add_button");
+    btn.onclick = function () {
+        if (targetDiv.style.display !== "none") {
+            targetDiv.style.display = "none";
+        } else {
+            targetDiv.style.display = "block";
+        }
+    };</script>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Trainings List</title>
+</head>
+<body>
+<div th:insert="navbar"></div>
+<div id="bg_cover">
+<h1>Adding exercise to training: <span th:text="${training.name}"></span></h1>
+<h1>Current exercises in training:</h1> <br/>
+<tr th:each="exercise : ${training.exercises}">
+    <td th:text="${exercise.name}"></td>
+</tr>
+<div class="card" style="width: 40%; margin-left: 30%">
+    <div class="card-body">
+        <form th:action="@{/save-training}" th:object="${training}" method="post" onsubmit="return dataValidation()">
+            <div class="form-group">
+                <label class="label">Ćwiczenie pierwsze:</label>
+                <select th:field="*{exercises}">
+                    <option th:each="exercise:${exerciseList}" th:value="${exercise.id}" th:text="${exercise.name}">
+                    </option>
+                </select>
+            </div>
+            <br/>
+            <input class="btn btn-primary" type="submit" value="Dodaj trening" id="add-button"/>
+        </form>
+    </div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercises List</title>
+</head>
+<body>
+<div th:insert="navbar"></div>
+<div id="bg_cover">
+<div>
+    <h1 class="white_word"> Exercises List </h1>
+    <table class="table table-dark" id="table_op">
+        <thead>
+            <tr>
+                <th> Name </th>
+                <th> Image </th>
+                <th> Description </th>
+                <th> Advance Level </th>
+                <th> Added by</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="exercise : ${exerciseList}">
+                <td th:text="${exercise.name}"></td>
+                <td class="w-25"><img th:src="${exercise.imagePath}" width="300px" height="200px"/></td>
+                <td class="description" th:text="${exercise.description}"></td>
+                <td th:text="${exercise.level}"></td>
+                <td th:text="${exercise.username}"></td>
+                <td>
+                    <a th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" class="btn btn-primary" th:href="@{/exercise/edit/{id} (id=${exercise.id})}">Edit</a>
+                    <a th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-danger" th:href="@{/exercise/delete/{id} (id=${exercise.id})}">Delete</a>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+
+</body>
+</html>

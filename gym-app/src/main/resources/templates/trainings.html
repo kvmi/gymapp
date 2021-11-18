@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Trainings List</title>
+</head>
+<body>
+<div th:insert="navbar"></div>
+<div id="bg_cover">
+    <div>
+        <h1 class="white_word"> Trainings List </h1>
+        <table class="table table-dark" id="table_op">
+            <thead>
+            <tr>
+                <th> Name </th>
+                <th> Exercises List </th>
+                <th> Added By </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="training : ${trainingList}">
+                <td th:text="${training.name}"></td>
+                <td th:text="${training.exercisesToString()}"></td>
+                <td th:text="${training.username}"></td>
+                <td>
+                    <a th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-danger" th:href="@{/training/delete/{id} (id=${training.id})}">Delete</a>
+                    <a class="btn btn-primary" th:href="@{/trainings/{id} (id=${training.id})}">Add Exercise</a>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+</head>
+<body>
+  <div th:insert="navbar"></div>
+  <div id="bg_cover">
+  <h2 id="welcome_text">Welcome to my GymApp.</h2>
+  <img id="main_page_pic" th:src="@{/images/mainpage.jpeg}" />
+  </div>
+</body>
+</html>

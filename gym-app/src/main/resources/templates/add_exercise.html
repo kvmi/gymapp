@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+</head>
+<body>
+
+<div th:insert="navbar"></div>
+<div id="bg_cover">
+
+
+<div id="add-exercise-container">
+    <a th:href="@{/exercises}"><input type="button" id="back-button" class="btn btn-primary" value="Back"></a>
+
+    <div class="card" style="width: 40%; margin-left: 30%">
+        <div class="card-body">
+            <h4>Adding Exercise</h4> <br/>
+            <form th:action="@{/save-exercise}" th:object="${exercise}" method="post" onsubmit="return dataValidation()">
+                <div class="form-group">
+                    <label class="label">Name*:</label>
+                    <input type="text" class="form-control" id="name" name="name"
+                           th:field="*{name}"/>
+                </div>
+                <div class="form-group">
+                    <label>Description*:</label>
+                    <textarea class="form-control" name="Text1" cols="40" rows="5" th:field="*{description}"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="label">URL:</label>
+                    <input class="form-control" type="text" id="imagePath" name="imagePath"
+                           th:field="*{imagePath}"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="label">Advanced Level:</label>
+                    <select class="form-control" th:field="*{level}">
+                        <option th:value="BEGINNER">Beginner</option>
+                        <option th:value="INTERMEDIATE">Intermediate</option>
+                        <option th:value="ADVANCED">Advanced</option>
+                    </select>
+                </div>
+                <br/>
+                <input class="btn btn-primary" type="submit" value="Add Exercise" id="add-button"/>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

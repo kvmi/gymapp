@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+    <!-- CSS only -->
+</head>
+<body>
+
+
+<div th:insert="navbar"></div>
+<div id="bg_cover">
+
+
+<div id="edit-exercise-container">
+    <a th:href="@{/exercises}"><input type="button" id="back-button" class="btn btn-primary" value="Powrót"></a>
+
+    <div class="card" style="width: 40%; margin-left: 30%">
+        <div class="card-body">
+            <h4>Aktualizowanie ćwiczenia</h4>
+            <hr>
+            <form th:action="@{/save-exercise}" th:object="${exercise}" method="POST">
+                <input type="hidden" th:field="*{id}" />
+                <input type="text" class="form-control" id="name" name="name"
+                       th:field="*{name}"/>
+                <textarea class="form-control" name="Text1" cols="40" rows="5" th:field="*{description}"></textarea>
+                <input class="form-control" type="text" id="imagePath" name="imagePath"
+                       th:field="*{imagePath}"/>
+                <select class="form-control" th:field="*{level}">
+                    <option th:value="BEGINNER">Beginner</option>
+                    <option th:value="INTERMEDIATE">Intermediate</option>
+                    <option th:value="ADVANCED">Advanced</option>
+                </select>
+
+                <input class="btn btn-primary" type="submit" value="Aktualizuj ćwiczenie" id="add-button"/>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
